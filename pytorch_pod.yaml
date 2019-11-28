@@ -5,7 +5,8 @@ metadata:
 spec:
   containers:
   - name: gpu-container
-    image: ufoym/deepo:pytorch-py36-cu101
+    image: daemonslayer/pod:pytorch
+    imagePullPolicy: Always
     command: ["sleep", "infinity"]
     resources:
       limits:
