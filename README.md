@@ -1,5 +1,5 @@
-# kubernetes
-Using Kubernetes-based server for Computational Photography Course
+<h1 align="center">kubernetes</h1>
+<h4 align="center">Using Kubernetes-based server for Computational Photography Course</h4>
 
 ### Instructions
 #### Pod Commands
