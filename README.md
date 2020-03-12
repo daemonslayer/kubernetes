@@ -64,7 +64,7 @@ Save this code in `Dockerfile` in a local directory. Then, build this docker fil
 
 To build a docker file, use the command
 ```bash
-docker build -f Dockerfile -t username/imagename:tag
+docker build -f Dockerfile -t username/imagename:tag .
 ```
 
 To push a docker file, use the command
