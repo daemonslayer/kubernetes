@@ -46,6 +46,13 @@ To list all jobs, use the command
 kubectl get jobs
 ```
 
+To get logs from the job, use the list of commands
+```bash
+kubectl describe job ${job name}
+# the description will contain the name of the pod that the job created, listed under "Events"
+kubectl logs ${pod name}
+```
+
 #### Docker Instructions
 If the Docker Image needs to be added on to, create a new Dockerfile and add all the required softwares. As an example : 
 
