@@ -14,6 +14,11 @@ To delete a pod, use the command
 kubectl delete pod ${pod name as in pod file}
 ```
 
+To force delete a pod if it's stuck in the `Terminating` phase, use the command
+```bash
+kubectl delete pod ${pod name} --grace-period=0 --force --namespace ${namespace}
+```
+
 To list all pods, use the command
 ```bash
 kubectl get pods
