@@ -3,6 +3,19 @@ kind: Pod
 metadata:
   name: pytorch-pod
 spec:
+  affinity:
+    nodeAffinity:
+      requiredDuringSchedulingIgnoredDuringExecution:
+        nodeSelectorTerms:
+        - matchExpressions:
+          - key: gpu-type
+            operator: In
+            values:
+            - 2080Ti
+  tolerations:
+  - key: "nautilus.io/general"
+    operator: "Exists"
+    effect: "NoSchedule"  
   containers:
   - name: gpu-container
     image: daemonslayer/pod:pytorch
@@ -10,18 +23,18 @@ spec:
     command: ["sleep", "infinity"]
     resources:
       limits:
-        cpu: 2
+        cpu: 1
         nvidia.com/gpu: 1
-        memory: 8Gi
+        memory: 12Gi
       requests:
         cpu: 1
-        memory: 8Gi
+        memory: 12Gi
         nvidia.com/gpu: 1
     volumeMounts:
-    - mountPath: /storage-pod
-      name: storage-pod
+    - mountPath: /creativeflow
+      name: creativeflow
   restartPolicy: Never
   volumes:
-    - name: storage-pod
+    - name: creativeflow
       persistentVolumeClaim:
-        claimName: storage-pod
+        claimName: creativeflow
