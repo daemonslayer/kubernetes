@@ -9,24 +9,26 @@ spec:
       - name: gpu-container
         image: daemonslayer/pod:pytorch
         imagePullPolicy: Always
-        command: ["sleep", "infinity"]
+        command: ["/bin/sh", "-c"]
+        args:
+        - "cd creativeflow/temp-cosmogan/ && bash requirements.sh && cd experiments/exp1_pix2pix_2dimg/ && nvidia-smi && python3 main.py --train y --test y"
         resources:
           limits:
-            nvidia.com/gpu: 1
-            memory: 25Gi
-            cpu: 2
-          requests:
-            memory: 8.0Gi
+            nvidia.com/gpu: 4
+            memory: 20Gi
             cpu: 1
-            nvidia.com/gpu: 1
+          requests:
+            memory: 20.0Gi
+            cpu: 1
+            nvidia.com/gpu: 4
         volumeMounts:
-        - mountPath: /storage-pod
-          name: storage-pod
+        - mountPath: /creativeflow
+          name: creativeflow
       restartPolicy: Never
       volumes:
-        - name: storage-pod
+        - name: creativeflow
           persistentVolumeClaim:
-            claimName: storage-pod
+            claimName: creativeflow
       initContainers:
       - name: init-clone-repo
         image: alpine/git
@@ -36,6 +38,6 @@ spec:
           - https://gitlab.nautilus.optiputer.net/prp/nautilus-cluster
           - /opt/repo/nautilus-cluster
         volumeMounts:
-          - name: storage-pod
-            mountPath: /storage-pod
+          - name: creativeflow
+            mountPath: /creativeflow
   backoffLimit: 5
